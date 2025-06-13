@@ -2,24 +2,35 @@
 {% block title %}Cover Letter Generator{% endblock %}
 
 {% block content %}
-  <h2>Create a Tailored Cover Letter</h2>
-  <form method="post" action="{{ url_for('generate_cover_letter', resume_id=resume.id) }}">
-    {{ render_field('job_description', 'Job Description', 'textarea', value=job_description, placeholder="Paste the full JD here…", required=True) }}
-    <div class="form-group">
-      <label for="tone">Tone</label>
-      <select id="tone" name="tone" class="form-control">
-        <option value="professional" selected>Professional</option>
-        <option value="friendly">Friendly</option>
-        <option value="assertive">Assertive</option>
-        <option value="creative">Creative</option>
-      </select>
-    </div>
-    <button type="submit" class="btn-primary">Generate Cover Letter</button>
-  </form>
+  <div class="login-card">  {# reuse glassmorphic card styles #}
+    <h2 class="text-center mb-4">Cover Letter Generator</h2>
 
-  {% if cover_letter %}
-    <h3>Your AI-Generated Cover Letter</h3>
-    <pre class="cover-letter-output">{{ cover_letter }}</pre>
-    <a href="{{ url_for('download_cover_letter', resume_id=resume.id) }}" class="btn-secondary">Download as .docx</a>
-  {% endif %}
+    <form method="post" action="{{ url_for('generate_cover_letter', resume_id=resume.id) }}">
+      {{ render_field('job_description',
+                      'Job Description',
+                      'textarea',
+                      value=job_description,
+                      placeholder='Paste the full JD here…',
+                      required=True) }}
+      <div class="form-group">
+        <label for="tone">Tone</label>
+        <select id="tone" name="tone" class="form-control">
+          <option value="professional" selected>Professional</option>
+          <option value="friendly">Friendly</option>
+          <option value="assertive">Assertive</option>
+          <option value="creative">Creative</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-primary">Generate Cover Letter</button>
+    </form>
+
+    {% if cover_letter %}
+      <hr class="my-4">
+      <h3>Your AI-Generated Cover Letter</h3>
+      <pre class="cover-letter-output">{{ cover_letter }}</pre>
+      <a href="{{ url_for('download_cover_letter', resume_id=resume.id) }}"
+         class="btn-secondary">Download as .docx</a>
+    {% endif %}
+  </div>
 {% endblock %}

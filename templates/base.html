@@ -12,28 +12,47 @@
 <body>
   <div class="main-container">
     <header class="site-header">
-      <img src="{{ url_for('static', filename='pm-portal-logo.png') }}" class="site-logo" alt="PM Portal Logo">
-      <div>
-        <span class="site-title">PM Portal</span>
-      </div>
+      <img src="{{ url_for('static', filename='pm-portal-logo.png') }}"
+           class="site-logo" alt="PM Portal Logo">
+      <span class="site-title">PM Portal</span>
     </header>
+
     <nav class="site-nav">
-      <a href="{{ url_for('home') }}" {% if request.endpoint=='home' %}class="active"{% endif %}>Home</a>
+      <a href="{{ url_for('home') }}"
+         {% if request.endpoint=='home' %}class="active"{% endif %}>Home</a>
       {% if current_user.is_authenticated %}
-        {% if current_user.role in ['agency', 'manager'] %}
-          <a href="{{ url_for('search') }}" {% if request.endpoint=='search' %}class="active"{% endif %}>Search</a>
+        {% if current_user.role in ['agency','manager'] %}
+          <a href="{{ url_for('search') }}"
+             {% if request.endpoint=='search' %}class="active"{% endif %}>
+            Search
+          </a>
         {% endif %}
-        {% if current_user.role == "agency" %}
-          <a href="{{ url_for('buy_credits') }}" {% if request.endpoint=='buy_credits' %}class="active"{% endif %}>Buy Credits</a>
+        {% if current_user.role == 'agency' %}
+          <a href="{{ url_for('buy_credits') }}"
+             {% if request.endpoint=='buy_credits' %}class="active"{% endif %}>
+            Buy Credits
+          </a>
         {% endif %}
-        {% if current_user.role == "manager" %}
-          <a href="{{ url_for('manager_all_cvs') }}" {% if request.endpoint=='manager_all_cvs' %}class="active"{% endif %}>All CVs</a>
+        {% if current_user.role == 'manager' %}
+          <a href="{{ url_for('manager_all_cvs') }}"
+             {% if request.endpoint=='manager_all_cvs' %}class="active"{% endif %}>
+            All CVs
+          </a>
         {% endif %}
-        <a href="{{ url_for('profile') }}" {% if request.endpoint=='profile' %}class="active"{% endif %}>Profile</a>
+        <a href="{{ url_for('profile') }}"
+           {% if request.endpoint=='profile' %}class="active"{% endif %}>
+          Profile
+        </a>
         <a href="{{ url_for('logout') }}">Logout</a>
       {% else %}
-        <a href="{{ url_for('login') }}" {% if request.endpoint=='login' %}class="active"{% endif %}>Login</a>
-        <a href="{{ url_for('register') }}" {% if request.endpoint=='register' %}class="active"{% endif %}>Register</a>
+        <a href="{{ url_for('login') }}"
+           {% if request.endpoint=='login' %}class="active"{% endif %}>
+          Login
+        </a>
+        <a href="{{ url_for('register') }}"
+           {% if request.endpoint=='register' %}class="active"{% endif %}>
+          Register
+        </a>
       {% endif %}
     </nav>
 
