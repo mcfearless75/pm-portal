@@ -1,0 +1,25 @@
+{# templates/_macros.html #}
+{% macro render_field(field_id, field_label, field_type='text', value='', placeholder='', required=False) %}
+  <div class="form-group">
+    <label for="{{ field_id }}">{{ field_label }}{% if required %}<span aria-hidden="true">*</span>{% endif %}</label>
+    <input
+      id="{{ field_id }}"
+      name="{{ field_id }}"
+      type="{{ field_type }}"
+      class="form-control"
+      value="{{ value }}"
+      placeholder="{{ placeholder }}"
+      {% if required %}required{% endif %}
+    >
+  </div>
+{% endmacro %}
+
+{% macro flash_messages(messages) %}
+  {% if messages %}
+    <div class="flash-messages" role="alert">
+      {% for msg in messages %}
+        {{ msg }}<br>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endmacro %}
