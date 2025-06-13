@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Manager: All CVs{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>All Uploaded CVs</h2>
+    <table style="width:100%;font-size:1em;">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Area</th>
+                <th>Uploaded</th>
+                <th>Tags</th>
+                <th>AI Summary</th>
+                <th>Download</th>
+                <th>AI Assess</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resume in resumes %}
+            <tr>
+                <td>{{ resume.user.name }}</td>
+                <td>{{ resume.user.area or "-" }}</td>
+                <td>{{ resume.upload_time.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    {% if resume.tags %}
+                        {{ resume.tags | map(attribute='tag') | join(', ') }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td style="max-width:250px;">{{ resume.summary or "-" }}</td>
+                <td>
+                    <a href="{{ url_for('download_resume', resume_id=resume.id) }}">Download</a>
+                </td>
+                <td>
+                  <form action="{{ url_for('ai_assess', resume_id=resume.id) }}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-sm">AI Assess</button>
+                  </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

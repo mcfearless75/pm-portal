@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+<h2>Edit Your Profile</h2>
+<form method="POST" class="profile-form">
+    <label>Name:</label>
+    <input type="text" name="username" value="{{ current_user.name }}" required>
+    <label>Email:</label>
+    <input type="email" name="email" value="{{ current_user.email or '' }}" autocomplete="email">
+    <label>Address:</label>
+    <input type="text" name="address" value="{{ current_user.address or '' }}">
+    <label>Phone:</label>
+    <input type="text" name="phone" value="{{ current_user.phone or '' }}">
+    <label>Area/Location:</label>
+    <input type="text" name="area" value="{{ current_user.area or '' }}">
+    <label>New Password (leave blank to keep current):</label>
+    <input type="password" name="password" autocomplete="new-password">
+    <button type="submit" class="btn">Save Changes</button>
+</form>
+<style>
+.profile-form {
+  max-width: 440px;
+  margin: 2rem auto;
+  background: #222e3b;
+  padding: 2.2rem 2rem 1.7rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0 2px 16px #19344934;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1em;
+}
+.profile-form label {
+  font-weight: 600;
+  margin-bottom: 0.2em;
+  color: #81cdfd;
+}
+.profile-form input {
+  padding: 0.65em;
+  border: 1px solid #28354a;
+  border-radius: 6px;
+  font-size: 1em;
+  background: #182635;
+  color: #d7f3ff;
+}
+.profile-form button {
+  margin-top: 1em;
+  background: #0ba2e6;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.8em;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.profile-form button:hover {
+  background: #1872a2;
+}
+@media (max-width: 600px) {
+  .profile-form { padding: 1.1rem 0.7rem 1.2rem 0.7rem; }
+}
+</style>
+{% endblock %}

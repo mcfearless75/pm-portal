@@ -1,0 +1,10 @@
+Flask
+Flask-Login
+Flask-SQLAlchemy
+Flask-Migrate
+passlib
+PyPDF2
+python-docx
+openai
+stripe
+gunicorn
